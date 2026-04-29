@@ -122,21 +122,11 @@ elif module == "📈 Demand Forecasting":
         alpha_val = st.slider("Alpha (ES only)", 0.1, 0.9, 0.3) if method == "Exponential Smoothing" else None
         ma_window = st.slider("Window (MA only)", 2, 6, 3)      if method == "Moving Average" else None
 
-uploaded = st.file_uploader("📂 Upload demand CSV (columns: Month, Demand)", type="csv")
+    uploaded = st.file_uploader("📂 Upload demand CSV (columns: Month, Demand)", type="csv")
     if uploaded:
         df = pd.read_csv(uploaded)
         history = df["Demand"].tolist()
-    labels  = df["Month"].tolist()
-
-else:
-    # fallback data if no file uploaded
-    history = [320, 345, 380, 360, 410, 450, 420, 490, 510, 480, 530, 560]
-    labels = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ]
-
-    
+        labels  = df["Month"].tolist()
     else:
         history = [320,345,380,360,410,450,420,490,510,480,530,560]
         labels  = [f"M{i+1}" for i in range(12)]
