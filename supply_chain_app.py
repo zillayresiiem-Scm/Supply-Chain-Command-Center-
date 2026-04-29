@@ -123,25 +123,10 @@ elif module == "📈 Demand Forecasting":
         ma_window = st.slider("Window (MA only)", 2, 6, 3)      if method == "Moving Average" else None
 
 uploaded = st.file_uploader("📂 Upload demand CSV (columns: Month, Demand)", type="csv")
-
-if uploaded:
-    df = pd.read_csv(uploaded)
-
-    # 🧹 Clean column names (removes hidden spaces)
-    df.columns = df.columns.str.strip()
-
-    # 🔍 Validate required columns
-    required_cols = ["Month", "Demand"]
-
-    missing_cols = [col for col in required_cols if col not in df.columns]
-
-    if missing_cols:
-        st.error(f"Missing columns in CSV: {missing_cols}")
-        st.stop()
-
-    # 📊 Extract data safely
-    history = df["Demand"].tolist()
-    labels = df["Month"].tolist()
+    if uploaded:
+        df = pd.read_csv(uploaded)
+        history = df["Demand"].tolist()
+    labels  = df["Month"].tolist()
 
 else:
     # fallback data if no file uploaded
